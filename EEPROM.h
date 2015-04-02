@@ -117,7 +117,7 @@ struct EEPtr{
 
 struct EEPROMClass{
 
-#if defined(__arm__) || defined(TEENSYDUINO)
+#if defined(__arm__) && defined(TEENSYDUINO)
     EEPROMClass()                        { eeprom_initialize(); }
 #endif
 
