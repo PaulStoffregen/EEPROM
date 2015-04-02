@@ -22,9 +22,16 @@
 
 #include <inttypes.h>
 
+#if defined(__MK20DX128__) || defined(__MK20DX256__) || defined(__MKL26Z64__)
+#include "avr_functions.h"
+#endif
+
 class EEPROMClass
 {
   public:
+#if defined(__MK20DX128__) || defined(__MK20DX256__) || defined(__MKL26Z64__)
+    EEPROMClass() { eeprom_initialize(); }
+#endif
     uint8_t read(int);
     void write(int, uint8_t);
 };
