@@ -9,7 +9,7 @@
 #include <EEPROM.h>
 
 /** the current address in the EEPROM (i.e. which byte we're going to write to next) **/
-int addr = 0;
+unsigned int addr = 0;
 
 void setup(){ /** Empty setup. **/}
 
@@ -38,6 +38,10 @@ void loop()
     - Arduno Duemilanove: 512b EEPROM storage.
     - Arduino Uno:        1kb EEPROM storage.
     - Arduino Mega:       4kb EEPROM storage.
+    - Teensy 3.0 & 3.1:   2kb EEPROM storage.
+    - Teensy-LC:          128b EEPROM storage.
+    - Teensy 2.0:         1kb EEPROM storage.
+    - Teensy++ 2.0:       4kb EEPROM storage.
 
     Rather than hard-coding the length, you should use the pre-provided length function.
     This will make your code portable to all AVR processors.
