@@ -143,7 +143,11 @@ struct EEPROMClass{
     template< typename T > const T &put( int idx, const T &t ){
         EEPtr e = idx;
         const uint8_t *ptr = (const uint8_t*) &t;
+#ifdef __arm__
+        eeprom_write_block(ptr, (void *)idx, sizeof(T));
+#else
         for( int count = sizeof(T) ; count ; --count, ++e )  (*e).update( *ptr++ );
+#endif
         return t;
     }
 };
