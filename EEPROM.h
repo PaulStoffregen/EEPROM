@@ -152,5 +152,5 @@ struct EEPROMClass{
     }
 };
 
-static EEPROMClass EEPROM;
+static EEPROMClass EEPROM __attribute__ ((unused));
 #endif
