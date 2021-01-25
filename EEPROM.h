@@ -135,7 +135,8 @@ struct EEPROMClass{
     uint16_t length()                    { return E2END + 1; }
 
     //Functionality to 'get' and 'put' objects to and from EEPROM.
-    template< typename T > T &get( int idx, T &t ){
+    template< typename T >
+    inline T &get( int idx, T &t ){
         static_assert(std::is_trivially_copyable<T>::value,"You can not use this type with EEPROM.get" ); // the code below only makes sense if you can "memcpy" T
 
         EEPtr e = idx;
@@ -144,7 +145,8 @@ struct EEPROMClass{
         return t;
     }
 
-    template< typename T > const T &put( int idx, const T &t ){
+    template< typename T >
+    inline const T &put( int idx, const T &t ){
         static_assert(std::is_trivially_copyable<T>::value, "You can not use this type with EEPROM.get"); // the code below only makes sense if you can "memcpy" T
 
         const uint8_t *ptr = (const uint8_t*) &t;
@@ -163,7 +165,7 @@ struct EEPROMClass{
 // including the trailing \0 to the eprom
 
 template <>
-const String &EEPROMClass::put(int idx, const String &s)
+inline const String &EEPROMClass::put(int idx, const String &s)
 {
     const uint8_t *ptr = (uint8_t *)s.c_str();
 
@@ -179,11 +181,11 @@ const String &EEPROMClass::put(int idx, const String &s)
 
 // get - Specialization for Arduino Strings -------------------------------
 // to "get" an Arduino String from the EEPROM we append chars from the EEPROM
-// into it until we find the delimiting /0. 
+// into it until we find the delimiting /0.
 // String.append is not very efficient, code could probably be opitimized if required...
 
 template <>
-String &EEPROMClass::get(int idx, String &s){
+inline String &EEPROMClass::get(int idx, String &s){
     s = "";             // just in case...
     EEPtr e = idx;
 
