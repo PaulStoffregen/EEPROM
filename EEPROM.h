@@ -30,6 +30,7 @@
 #include <type_traits>
 #endif
 
+#include <WString.h>    // need to include this so String is defined
 
 /***
     EERef class.
