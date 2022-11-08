@@ -1,0 +1,23 @@
+
+#=============================================================================#
+# [PUBLIC/USER]
+#
+# remove_path(LIST_VAR PATH)
+#
+#        LIST_VAR - Output variable that will contain the list path
+#        ABSOLUTE_PATH - Path to exclude (and all subdirectories)
+#
+# Remove path from list of path
+#=============================================================================#
+
+function(REMOVE_PATH LIST_VAR ABSOLUTE_PATH)
+
+    foreach (TMP_PATH ${${LIST_VAR}})
+        string(FIND "${TMP_PATH}" ${ABSOLUTE_PATH} EXCLUDE_DIR_FOUND)
+        if (NOT ${EXCLUDE_DIR_FOUND} EQUAL -1)
+            list (REMOVE_ITEM ${LIST_VAR} "${TMP_PATH}")
+        endif()
+    endforeach(TMP_PATH)
+
+    SET(${LIST_VAR} ${${LIST_VAR}} PARENT_SCOPE)
+endfunction()

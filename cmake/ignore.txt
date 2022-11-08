@@ -1,0 +1,4 @@
+
+# Sample
+remove_path(FILES_CPP /examples/)
+remove_path(FILES_H /examples/)
